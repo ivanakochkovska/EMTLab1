@@ -11,5 +11,5 @@ public interface BookService {
     List<Book> getAllBooks();
     void deleteBook(Long id);
     void updateCapacity(Long id);
-    void updateBook(long id, int availableCopies, CATEGORY category, String name);
+    void updateBook(Long id, int availableCopies, CATEGORY category, String name);
 }

@@ -36,11 +36,9 @@ public class BookController {
 
     @PostMapping(value = "/update/{id}")
     public ResponseEntity updateBook(@PathVariable Long id,
-                               @RequestParam Integer availableCopies,
-                               @RequestParam String category,
-                               @RequestParam String name) {
-        CATEGORY category1 = CATEGORY.valueOf(category);
-        bookService.updateBook(id, availableCopies, category1, name);
+                              @RequestBody Book book) {
+        CATEGORY category1 = book.getCategory();
+        bookService.updateBook(id, book.getAvailableCopies(),category1, book.getName());
         return ResponseEntity.ok().build();
     }
 //    @PostMapping(value = "/newBook")

@@ -11,12 +11,14 @@ class EditBook extends React.Component {
             availableCopies: '',
             previousBook: this.props.previousBook,
         }
+        this.onFormSubmit = this.onFormSubmit.bind(this);
     }
-    onFormSubmit(id,name, authorList, availableCopies, category) {
-        axios.post(`/update/${id}`,{params: {
-            availableCopies: availableCopies,
-              category: category,
-              name: name
+    onFormSubmit(event) {
+        event.preventDefault()
+        axios.post(`/update/${this.state.previousBook.id}`,{params: {
+            availableCopies: this.state.availableCopies,
+              category: this.state.category,
+              name: this.state.name
         }});
     }
     refresh=()=> {
@@ -53,21 +55,19 @@ class EditBook extends React.Component {
                                    aria-describedby="emailHelp"
                                    onChange={event => {
                                        this.setState({availableCopies: event.target.value})
-                                   }}/>
+                                   }} value={this.state.previousBook.availableCopies}/>
                         </div>
                         <div className="form-group">
                             <label htmlFor="exampleInputPassword1">Category: </label>
-                            <input type="password"  className="form-control" id="exampleInputPassword1"
+                            <input type="password"  className="form-control"
                                    onChange={event => {
                                        this.setState({category: event.target.value})
                                    }}
-
+                                value={this.state.previousBook.category}
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary" onClick={()=>{this.onFormSubmit(this.state.name,this.state.authorList,this.state.availableCopies
-                        ,this.state.category);this.refresh()}}/>
-                        <br/><br/><br/>
-                        <div>{this.state.message}</div>
+                        <button type="submit" className="btn btn-primary" onClick={(e)=>{this.onFormSubmit(e); this.refresh()}}
+                            /> SAVE
                     </form>
                 </div>
             </>

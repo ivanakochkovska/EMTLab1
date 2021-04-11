@@ -32,7 +32,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void updateBook(long id, int availableCopies, CATEGORY category, String name) {
+    public void updateBook(Long id, int availableCopies, CATEGORY category, String name) {
         Book book = bookRepository.findById(id).get();
         book.setAvailableCopies(availableCopies);
         book.setCategory(category);
